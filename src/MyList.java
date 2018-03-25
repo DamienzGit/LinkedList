@@ -95,6 +95,7 @@ public class MyList {
 		}
 	}
 	
+	// non funziona
 	private int pop() {
 		System.out.print("ora la lista è ");
 		this.print();
@@ -107,6 +108,7 @@ public class MyList {
 		
 	}
 	
+	// funziona
 	public void remove(int index) {
 		
 		while (this.next != null) {
@@ -125,6 +127,7 @@ public class MyList {
 	
 	}
 	
+	// funziona
 	public MyList concat(MyList newlist) {
 		while (this.next!=null) {
 			this.next.concat(newlist);
