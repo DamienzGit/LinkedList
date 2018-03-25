@@ -17,13 +17,14 @@ public class MyList {
 		this.val = new_element;
 	}
 	
-	
+	// funziona
 	MyList(int[] numeri) {
 		for(int i = 0; i < numeri.length; i++) {
 			this.insert(numeri[i]);
 		}
 	}
 	
+	// funziona
 	MyList(MyList newlist) {
 		this.val = newlist.val;
 		this.prev = newlist.prev;
