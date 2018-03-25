@@ -24,6 +24,14 @@ public class MyList {
 		}
 	}
 	
+	MyList(MyList newlist) {
+		this.val = newlist.val;
+		this.prev = newlist.prev;
+		this.next = newlist.next;
+		pos_in = 0;
+		pos_re = 0;
+	}
+	
 	// funziona
 	public void insert(int n) {
 		if (this.val == null) {
@@ -45,6 +53,7 @@ public class MyList {
 	// funziona
 	public void insert(int index, int newval) throws InvalidPositionException {
 		if (index < 0 ) throw new InvalidPositionException();
+		
 		while (this.next != null) {
 			if (pos_in == index) {
 				//shift
@@ -55,14 +64,17 @@ public class MyList {
 				newnode.next = this;
 				newnode.prev = leftcopy;
 				leftcopy.next = newnode;
-				break;
+				pos_in = 0;
+				return;
 			}
-			pos_in++;
-			next.insert(index, newval);
-			break;
+			else {
+				pos_in++;
+				next.insert(index, newval);
+				return;
+			}
 		}
-		if (pos_in < index) throw new InvalidPositionException();
-		pos_in++;
+		if (index > pos_in) throw new InvalidPositionException();
+		pos_in = 0;
 		return;
 	}
 	
@@ -82,18 +94,46 @@ public class MyList {
 		}
 	}
 	
-	public void remove(int index) {
+	private int pop() {
+		System.out.print("ora la lista è ");
+		this.print();
+		while(this.next != null) {
+			return this.next.pop();
+		}
+		int revalue = this.val;
+		this.prev.next = null;
+		return revalue;
+		
+	}
 	
+	public void remove(int index) {
+		
+		while (this.next != null) {
+			if (pos_re == index) {
+				this.prev.next = this.next;
+				this.next.prev = this.prev;
+				pos_re = 0;
+				return;
+			} else {
+				pos_re++;
+				this.next.remove(index);
+				return;
+			}
+			
+		}
 	
 	}
 	
-	public void concat(MyList newlist) {
+	public MyList concat(MyList newlist) {
 		while (this.next!=null) {
 			this.next.concat(newlist);
-			return;
+			break;
 		}
-		this.next = newlist;
-		newlist.prev = this;
+		MyList obj = new MyList(newlist);
+		MyList mine = this;
+		mine.next = obj;
+		obj.prev = mine;
+		return mine;
 	}
 	
 	public void clear() {
@@ -104,5 +144,17 @@ public class MyList {
 		pos_re 		= 0;
 	}
 	
+	public void reverse_inplace() {
+	
+	}
+	
+	public MyList reverse_new() {
+		MyList thiscopy = this;
+		MyList obj = new MyList();
+		while (thiscopy.next != null) {
+			obj.insert(thiscopy.pop());
+		}
+		return obj;
+	}
 }
 

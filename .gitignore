@@ -4,3 +4,4 @@
 *.class
 *.MF
 *.jar
+src/CustomMain.java
