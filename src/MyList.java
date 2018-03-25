@@ -95,9 +95,8 @@ public class MyList {
 		}
 	}
 	
-	// non funziona
+	// funziona
 	private int pop() {
-		System.out.print("ora la lista è ");
 		this.print();
 		while(this.next != null) {
 			return this.next.pop();
@@ -140,6 +139,7 @@ public class MyList {
 		return mine;
 	}
 	
+	// da testare
 	public void clear() {
 		this.next   = null;
 		this.prev   = null;
@@ -148,6 +148,7 @@ public class MyList {
 		pos_re 		= 0;
 	}
 	
+	// non funziona
 	public void reverse_inplace() {
 	
 	}
