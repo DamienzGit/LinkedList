@@ -148,6 +148,7 @@ public class MyList {
 	
 	}
 	
+	// non funziona
 	public MyList reverse_new() {
 		MyList thiscopy = this;
 		MyList obj = new MyList();
