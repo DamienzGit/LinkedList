@@ -32,7 +32,11 @@ public class MyList {
 		pos_in = 0;
 		pos_re = 0;
 	}
-	
+	private void insert( MyList list) {
+		list.prev = this;
+		this.next = list;
+		
+	}
 	// funziona
 	public void insert(int n) {
 		if (this.val == null) {
@@ -108,8 +112,9 @@ public class MyList {
 	}
 	
 	// funziona
-	public void remove(int index) {
-		
+	public void remove(int index) throws EmptyListException, InvalidPositionException{
+		if (index < 0) throw new InvalidPositionException();
+		if (pos_re==0 && this.val == null) throw new EmptyListException();
 		while (this.next != null) {
 			if (pos_re == index) {
 				this.prev.next = this.next;
@@ -121,23 +126,33 @@ public class MyList {
 				this.next.remove(index);
 				return;
 			}
-			
 		}
+		if (index > pos_re) throw new InvalidPositionException();
+		pos_re = 0;
+		return;
 	
+	}
+	
+	private MyList getLastNode() {
+		if (this.next == null) {
+			return this;
+		}
+		return this.next.getLastNode();
 	}
 	
 	// funziona
-	public MyList concat(MyList newlist) {
-		while (this.next!=null) {
-			this.next.concat(newlist);
-			break;
+	public Object concat(MyList newlist) {
+		MyList copy = null;
+		try {
+			copy = (MyList)this.clone();
+		} catch(CloneNotSupportedException e) {
+			e.printStackTrace();
 		}
-		MyList obj = new MyList(newlist);
-		MyList mine = this;
-		mine.next = obj;
-		obj.prev = mine;
-		return mine;
+		copy.getLastNode().insert(newlist);
+		return copy;
 	}
+	
+	
 	
 	// da testare
 	public void clear() {

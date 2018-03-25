@@ -2,19 +2,22 @@ public class CustomMain {
 	
 	public static void main(String[] args) {
 		MyList coda1 = new MyList();
+		MyList coda2 = new MyList();
 		
 		for(int i = 10; i <= 100; i += 10) {
 			coda1.insert(i);
 		}
-		coda1.print();
-		try {
-			coda1.insert(3, 111);
-			coda1.print();
-			coda1.insert(5, 222);
-			coda1.print();
-		} catch(InvalidPositionException e) {
-			e.printStackTrace();
+		for(int i = 200; i <= 1000; i += 100) {
+			coda2.insert(i);
 		}
+		
+		coda1.print();
+		coda2.print();
+		MyList roba = coda1.concat(coda2);
+		roba.print();
+		System.out.println("_______________________-");
+		coda1.print();
+		coda2.print();
 		
 		
 	}
